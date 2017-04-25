@@ -23,6 +23,13 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include <cmath>
+#include <random>
+#include "Board.h"
+#include "Ball.h"
+#include "Face.h"
+#include "Goal.h"
+
 
 class Game
 {
@@ -34,22 +41,49 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel();
+	
 	/********************************/
 	/*  User Functions              */
+
+	void drawprogress();
+	void accall();
+	void rppall(int p);
 	/********************************/
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	int x = 300, y = 300, speed = 3;
-	int r = 255, g = 255, b = 255;
-	int sqlen = 10;						//sqare lenght
-	int vx = 0, vy = 0;
-	bool inhibRight = false;
-	bool inhibLeft = false;
-	bool inhibUp = false;
-	bool inhibDown = false;
+	
+
+	std::random_device rd;
+	std::mt19937 rng;
+	std::uniform_int_distribution<int> xrange;
+	std::uniform_int_distribution<int> yrange;
+	std::uniform_int_distribution<int> vrange;
+	std::uniform_int_distribution<int> rgbrange;
+	std::uniform_int_distribution<int> boolrange;
+	std::uniform_int_distribution<int> krange;
+	std::uniform_int_distribution<int> drange;
+
+	Board nr;
+	Board progress;
+	static constexpr int num = 10;
+	int n = 3;
+	Ball ballz[num];
+	Face face;
+	Goal goal;
+
+	int test = 0;
+	int x = 300, y = 400;
+	int r = 10;
+	bool gameover = false;
+	bool win = false;
+	int klife = 0;
+	int level = 0;
+	
 
 	/********************************/
 };
+
+
